@@ -101,6 +101,7 @@ Space complexity refers to the amount of memory required by an algorithm to exec
 3. Quick Sort
 4. Heap Sort
 5. Insertion Sort
+6. Counting Sort
 
 ### Searching Algorithms
 1. Linear Search

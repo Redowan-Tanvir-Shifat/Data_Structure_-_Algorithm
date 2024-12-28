@@ -3,29 +3,33 @@
 #include <algorithm>
 using namespace std;
 
-// Function to find the minimum number of coins (using `while`)
+// Function to find the minimum number of coins to make up a given amount
 void findMinCoins(vector<int> &coins, int amount) {
 
-    sort(coins.rbegin(), coins.rend()); // Sort coins in descending order
+    // Sort the coins in descending order to start with the largest denominations
+    sort(coins.rbegin(), coins.rend());
 
-    vector<int> result; // To store the selected coins
+    vector<int> result; // Vector to store the coins used to form the amount
 
+    // Iterate through each coin in the sorted list
     for (int coin : coins) {
-        while (amount >= coin) { // Keep using the coin until it no longer fits
-            amount -= coin;
-            result.push_back(coin);
+        // Use the current coin as many times as possible while it fits in the remaining amount
+        while (amount >= coin) {
+            amount -= coin;         // Subtract the value of the coin from the amount
+            result.push_back(coin); // Add the coin to the result list
         }
     }
 
-    // If amount cannot be made using the coins
+    // If there is any remaining amount after processing all coins, it cannot be formed
     if (amount != 0) {
         cout << "The amount cannot be formed using the given coins." << endl;
         return;
     }
 
-    // Output the result
+    // Output the number of coins used
     cout << "Minimum coins required: " << result.size() << endl;
 
+    // Output the specific coins used
     cout << "Coins used: ";
     for (int coin : result) {
         cout << coin << " ";
@@ -34,10 +38,13 @@ void findMinCoins(vector<int> &coins, int amount) {
 }
 
 int main() {
-    vector<int> coins = {1, 2, 5, 10, 20, 50, 100, 500}; // Coin denominations
+    // List of available coin denominations
+    vector<int> coins = {1, 2, 5, 10, 20, 50, 100, 500};
 
+    // Amount to be formed
     int amount = 93;
 
+    // Call the function to find the minimum coins
     findMinCoins(coins, amount);
 
     return 0;
